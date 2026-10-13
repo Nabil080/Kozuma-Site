@@ -1,0 +1,3 @@
+# Short link printed on Rewind cards: forwards to the Rewind site, keeping the path.
+/rewind     https://rewind.kozuma.studio/        301
+/rewind/*   https://rewind.kozuma.studio/:splat  301

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kozuma</title>
+<meta name="description" content="Kozuma is an independent studio making apps, games and tools.">
+<meta name="theme-color" content="#121212">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Mono:wght@500&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #121212; --panel: #1f1e1c; --ink: #f3efe2; --muted: rgba(243,239,226,.68); --yellow: #ffd23f; --orange: #ff5a36; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 "DM Sans", system-ui, sans-serif; }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  .mono { font-family: "DM Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; color: var(--muted); }
+  .display { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+
+  /* Language: both texts live in the page, the html lang attribute picks one. */
+  html[lang="en"] [lang="fr"], html[lang="fr"] [lang="en"] { display: none !important; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .brand { font-size: 26px; text-decoration: none; }
+  .switch { display: flex; gap: 4px; background: var(--panel); border-radius: 999px; padding: 4px; }
+  .switch button { border: 0; background: none; color: var(--muted); font: 700 13px "DM Sans", sans-serif; padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+  .switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+  .hero { padding: 72px 0 56px; }
+  h1 { font-size: clamp(48px, 9vw, 96px); margin: 14px 0 18px; }
+  h1 em { font-style: normal; color: var(--yellow); }
+  .lead { font-size: 19px; color: var(--muted); max-width: 32em; margin: 0; }
+
+  h2 { font-size: 28px; margin: 10px 0 20px; }
+  .project { display: flex; gap: 20px; align-items: center; background: var(--panel); border-radius: 22px; padding: 20px; text-decoration: none; }
+  .project img { width: 72px; height: 72px; border-radius: 18px; flex: none; }
+  .project b { display: block; font-size: 20px; }
+  .project p { margin: 2px 0 0; color: var(--muted); }
+  .project .go { margin-left: auto; color: var(--yellow); font-weight: 700; white-space: nowrap; }
+  .soon { margin-top: 14px; color: var(--muted); font-size: 15px; }
+
+  footer { margin-top: 72px; padding: 32px 0 48px; color: var(--muted); font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; border-top: 1px solid rgba(243,239,226,.12); }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 40px; }
+    .project { flex-wrap: wrap; }
+    .project .go { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand display" href="./">kozuma</a>
+    <div class="switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="fr">FR</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="mono"><span lang="en">Independent studio</span><span lang="fr">Studio indépendant</span></div>
+      <h1 class="display">
+        <span lang="en">Small apps, <em>made with care.</em></span>
+        <span lang="fr">Des petites apps, <em>faites avec soin.</em></span>
+      </h1>
+      <p class="lead">
+        <span lang="en">Kozuma makes apps, games and tools that respect your privacy. Made in France by one developer.</span>
+        <span lang="fr">Kozuma crée des apps, des jeux et des outils qui respectent ta vie privée. Faits en France par un développeur.</span>
+      </p>
+    </div>
+
+    <section>
+      <div class="mono"><span lang="en">Projects</span><span lang="fr">Projets</span></div>
+      <h2 class="display"><span lang="en">What we make</span><span lang="fr">Ce qu'on fait</span></h2>
+      <a class="project" href="https://rewind.kozuma.studio/">
+        <img src="icon-192.png" alt="">
+        <div>
+          <b>Rewind</b>
+          <p><span lang="en">Your year in photos, as story cards. Nothing leaves your phone.</span><span lang="fr">Ton année en photos, en stories. Rien ne quitte ton téléphone.</span></p>
+        </div>
+        <span class="go"><span lang="en">See Rewind →</span><span lang="fr">Voir Rewind →</span></span>
+      </a>
+      <p class="soon"><span lang="en">More to come: games, tools and other apps.</span><span lang="fr">D'autres projets arrivent : jeux, outils et autres apps.</span></p>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 Kozuma</span>
+    <a href="mailto:contact@kozuma.studio">contact@kozuma.studio</a>
+  </footer>
+</div>
+
+<script>
+  // Language: the visitor's choice, else the browser's, else English.
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    for (const b of document.querySelectorAll('.switch button')) b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+  }
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch {}
+  const browserLang = (navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+  setLang(saved === 'fr' || saved === 'en' ? saved : browserLang);
+  for (const b of document.querySelectorAll('.switch button')) {
+    b.addEventListener('click', () => {
+      setLang(b.dataset.lang);
+      try { localStorage.setItem('lang', b.dataset.lang); } catch {}
+    });
+  }
+</script>
+</body>
+</html>
