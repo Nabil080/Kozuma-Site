@@ -7,19 +7,33 @@
 <meta name="description" content="Kozuma is an independent development studio from France: apps, websites, tools and video games, made with heart.">
 <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)">
+<script>
+  // Apply the saved theme before the page paints, so there is no flash.
+  try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}
+</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="img/kozuma-icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kozuma">
+<meta property="og:description" content="Independent development studio from France: apps, websites, tools and video games, made with heart.">
+<meta property="og:url" content="https://kozuma.studio/">
+<meta property="og:image" content="https://kozuma.studio/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/ibm-plex-mono-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
   :root {
     --display: "IBM Plex Mono", ui-monospace, monospace; --display-weight: 600; --display-track: -.04em; --body: "IBM Plex Sans", system-ui, sans-serif;
     --bg: #f4f1ea; --ink: #161513; --muted: #6b675e; --line: rgba(22,21,19,.14); --card: #ebe6db; --accent: #2348e8;
   }
+  /* Theme: follows the device unless the visitor picked one (data-theme on <html>). */
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #141311; --ink: #f1ede4; --muted: #9c978b; --line: rgba(241,237,228,.14); --card: #1f1d1a; --accent: #7d95ff; }
+    :root:not([data-theme="light"]) { --bg: #141311; --ink: #f1ede4; --muted: #9c978b; --line: rgba(241,237,228,.14); --card: #1f1d1a; --accent: #7d95ff; }
   }
+  :root[data-theme="dark"] { --bg: #141311; --ink: #f1ede4; --muted: #9c978b; --line: rgba(241,237,228,.14); --card: #1f1d1a; --accent: #7d95ff; }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--body); }
@@ -34,10 +48,16 @@
 
   header { display: flex; align-items: center; gap: 28px; padding: 22px 0; }
   .brand { display: flex; align-items: center; gap: 10px; font-size: 22px; text-decoration: none; }
-  .brand svg { width: 28px; height: 28px; flex: none; }
+  .brand svg { height: 28px; width: auto; flex: none; display: block; }
   nav { display: flex; gap: 22px; margin-left: auto; font-size: 15px; }
   nav a { text-decoration: none; color: var(--muted); }
   nav a:hover { color: var(--ink); }
+  .theme { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--ink); cursor: pointer; padding: 0; }
+  .theme svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .theme .sun { display: none; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme .sun { display: block; } :root:not([data-theme="light"]) .theme .moon { display: none; } }
+  :root[data-theme="dark"] .theme .sun { display: block; } :root[data-theme="dark"] .theme .moon { display: none; }
+  .theme + .switch { margin-left: -18px; }
   .switch { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
   .switch button { border: 0; background: none; color: var(--muted); font: 700 12px var(--body); padding: 5px 10px; border-radius: 999px; cursor: pointer; }
   .switch button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
@@ -79,10 +99,12 @@
   .contact p { color: var(--muted); margin: 0 0 22px; }
 
   footer { padding: 28px 0 44px; color: var(--muted); font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; border-top: 1px solid var(--line); }
+  footer .legal { display: flex; gap: 18px; }
+  footer a { text-decoration: none; } footer a:hover { color: var(--ink); }
 
   @media (max-width: 760px) {
     nav { display: none; }
-    .switch { margin-left: auto; }
+    .theme { margin-left: auto; }
     .hero { padding: 48px 0 56px; }
     .values { grid-template-columns: 1fr; }
     .row { grid-template-columns: 56px 1fr auto; gap: 16px; }
@@ -96,15 +118,18 @@
 <body>
 <div class="wrap">
   <header>
-    <a class="brand display" href="./">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path d="M10 7.5v17M10 17l10.5-9.5M13.4 14l8.1 10.5" stroke="var(--bg)" stroke-width="4" fill="none"/></svg>
-      kozuma
+    <a class="brand" href="./" aria-label="Kozuma">
+      <svg viewBox="-40 -800 3592 900" aria-hidden="true"><g fill="none" stroke-width="128" stroke-linecap="round" stroke-linejoin="round"><path d="M114.0 -632.0 L114.0 -66.0" stroke="var(--ink)"/><path d="M573.6 -586.9 L267.4 -349.0 L573.6 -111.1" stroke="var(--accent)"/></g><path fill="var(--ink)" d="M972 12Q913 12 866.5 -7.0Q820 -26 787.5 -61.0Q755 -96 737.5 -146.0Q720 -196 720 -258Q720 -320 737.5 -370.0Q755 -420 787.5 -455.0Q820 -490 866.5 -509.0Q913 -528 972 -528Q1030 -528 1077.0 -509.0Q1124 -490 1156.5 -455.0Q1189 -420 1206.5 -370.0Q1224 -320 1224 -258Q1224 -196 1206.5 -146.0Q1189 -96 1156.5 -61.0Q1124 -26 1077.0 -7.0Q1030 12 972 12ZM972 -86Q1027 -86 1059.0 -119.5Q1091 -153 1091 -218V-298Q1091 -363 1059.0 -396.5Q1027 -430 972 -430Q917 -430 885.0 -396.5Q853 -363 853 -298V-218Q853 -153 885.0 -119.5Q917 -86 972 -86Z M1304 0V-109L1604 -415H1314V-516H1750V-407L1450 -101H1760V0Z M2189 -91H2184Q2167 -49 2131.5 -18.5Q2096 12 2033 12Q1957 12 1909.5 -38.5Q1862 -89 1862 -183V-516H1990V-201Q1990 -89 2087 -89Q2106 -89 2124.5 -94.0Q2143 -99 2157.5 -109.5Q2172 -120 2180.5 -135.0Q2189 -150 2189 -171V-516H2317V0H2189Z M2389 0V-516H2495V-445H2501Q2513 -479 2535.5 -503.5Q2558 -528 2599 -528Q2638 -528 2661.0 -505.5Q2684 -483 2691 -442H2696Q2709 -477 2734.5 -502.5Q2760 -528 2807 -528Q2864 -528 2889.0 -487.0Q2914 -446 2914 -366V0H2809V-351Q2809 -396 2796.5 -414.0Q2784 -432 2759 -432Q2736 -432 2720.5 -417.0Q2705 -402 2705 -371V0H2599V-351Q2599 -396 2587.0 -414.0Q2575 -432 2550 -432Q2526 -432 2510.5 -417.0Q2495 -402 2495 -371V0Z M3402 0Q3355 0 3329.5 -23.5Q3304 -47 3299 -89H3294Q3280 -41 3239.0 -14.5Q3198 12 3138 12Q3060 12 3014.0 -29.0Q2968 -70 2968 -143Q2968 -299 3197 -299H3288V-333Q3288 -382 3264.0 -407.0Q3240 -432 3186 -432Q3137 -432 3107.0 -413.0Q3077 -394 3056 -364L2983 -426Q3007 -469 3060.5 -498.5Q3114 -528 3199 -528Q3301 -528 3358.5 -480.5Q3416 -433 3416 -339V-96H3477V0ZM3181 -76Q3227 -76 3257.5 -97.5Q3288 -119 3288 -156V-225H3200Q3095 -225 3095 -159V-139Q3095 -108 3118.0 -92.0Q3141 -76 3181 -76Z"/></svg>
     </a>
     <nav>
       <a href="#projects"><span lang="en">Projects</span><span lang="fr">Projets</span></a>
       <a href="#studio">Studio</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button type="button" class="theme" aria-label="Light or dark theme">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
     <div class="switch" role="group" aria-label="Language">
       <button type="button" data-lang="en">EN</button>
       <button type="button" data-lang="fr">FR</button>
@@ -189,12 +214,27 @@
   </main>
 
   <footer>
-    <span>© 2026 Kozuma</span>
-    <span lang="en">Made in France</span><span lang="fr">Fait en France</span>
+    <span>© 2026 Kozuma · <span lang="en">Made in France</span><span lang="fr">Fait en France</span></span>
+    <span class="legal"><a href="legal/"><span lang="en">Legal notice</span><span lang="fr">Mentions légales</span></a><a href="privacy/"><span lang="en">Privacy</span><span lang="fr">Confidentialité</span></a></span>
   </footer>
 </div>
 
 <script>
+  // Theme: flips whatever is showing now and remembers the choice.
+  const themeColor = { light: '#f4f1ea', dark: '#141311' };
+  function showTheme() {
+    const t = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    for (const m of document.querySelectorAll('meta[name="theme-color"]')) m.content = themeColor[t];
+  }
+  document.querySelector('.theme').addEventListener('click', () => {
+    const dark = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() === '#141311';
+    const next = dark ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+    showTheme();
+  });
+  if (document.documentElement.dataset.theme) showTheme();
+
   // Language: the visitor's choice, else the browser's, else English.
   function setLang(lang) {
     document.documentElement.lang = lang;
