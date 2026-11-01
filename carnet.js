@@ -7,6 +7,7 @@
 //   date : année-mois-jour. La date affichée et l'ordre se font tout seuls.
 //   fin  : facultatif, la date de fin quand ça a duré plusieurs jours.
 //   enCours : mets true à la place de la date pour un projet en cours. Il s'affiche tout en haut.
+//   titre : un nom court, écrit en grand. "title" pour sa version anglaise, si elle change.
 //   fr   : le texte en français.
 //   en   : le texte en anglais. Si tu l'enlèves, le français s'affiche à la place.
 //   lien : facultatif, l'adresse du site ou du dépôt public.
@@ -19,8 +20,9 @@ const CARNET = [
   {
     replie: true,
     date: "2023-01-30",
-    fr: "Début de ma formation de développeur web à Simplon.",
-    en: "Start of my web developer course at Simplon.",
+    titre: "Simplon",
+    fr: "Début de ma formation de développeur web.",
+    en: "Start of my web developer course.",
     sous: [
       {
         date: "2022-12-05",
@@ -32,8 +34,10 @@ const CARNET = [
   },
   {
     date: "2023-09-22",
-    fr: "Diplômé développeur web et web mobile, titre RNCP de niveau 5.",
-    en: "Graduated as a web and mobile web developer, RNCP level 5.",
+    titre: "Diplôme RNCP 5",
+    title: "RNCP 5 diploma",
+    fr: "Développeur web et web mobile.",
+    en: "Web and mobile web developer.",
     sous: [
       {
         date: "2023-03-16",
@@ -93,8 +97,10 @@ const CARNET = [
     replie: true,
     date: "2024-03-11",
     fin: "2024-04-07",
-    fr: "La piscine de l'école 42.",
-    en: "The 42 school piscine.",
+    titre: "Piscine de l'école 42",
+    title: "42 school piscine",
+    fr: "Quatre semaines de sélection.",
+    en: "Four weeks of selection.",
     sous: [
       {
         date: "2024-05-13",
@@ -105,8 +111,10 @@ const CARNET = [
   },
   {
     date: "2025-05-25",
-    fr: "Tronc commun de 42 terminé, jusqu'à Transcendance.",
-    en: "42's common core completed, all the way to Transcendence.",
+    titre: "École 42",
+    title: "42 school",
+    fr: "Tronc commun terminé, jusqu'à Transcendance.",
+    en: "Common core completed, all the way to Transcendence.",
     sous: [
       {
         date: "2024-05-15",
@@ -166,8 +174,10 @@ const CARNET = [
   },
   {
     date: "2025-10-28",
-    fr: "Une passion naissante pour le jeu vidéo.",
-    en: "A growing passion for video games.",
+    titre: "Le jeu vidéo",
+    title: "Video games",
+    fr: "Une passion naissante, qui a mené à plusieurs projets.",
+    en: "A growing passion, which led to several projects.",
     lien: "https://kozumagames.itch.io",
     sous: [
       {
@@ -204,8 +214,9 @@ const CARNET = [
   },
   {
     date: "2026-10-13",
-    fr: "Création de Kozuma, ma micro-entreprise, et début des projets pro.",
-    en: "Kozuma is founded as my own business, and professional projects begin.",
+    titre: "Kozuma",
+    fr: "Création de ma micro-entreprise, et début des projets pro.",
+    en: "Founding my own business, and the start of professional projects.",
     sous: [
       {
         date: "2026-10-13",
@@ -227,8 +238,9 @@ const CARNET = [
   },
   {
     enCours: true,
-    fr: "Rewind, ton année en photos.",
-    en: "Rewind, your year in photos.",
+    titre: "Rewind",
+    fr: "Ton année en photos, en stories. Rien ne quitte ton téléphone.",
+    en: "Your year in photos, as story cards. Nothing leaves your phone.",
     lien: "https://rewind.kozuma.studio/",
     sous: [
       {
@@ -271,8 +283,9 @@ const CARNET = [
   },
   {
     enCours: true,
-    fr: "TierLore, des tier lists d'anime qui ne spoilent rien.",
-    en: "TierLore, anime tier lists that spoil nothing.",
+    titre: "TierLore",
+    fr: "Des tier lists d'anime qui ne spoilent rien.",
+    en: "Anime tier lists that spoil nothing.",
     lien: "https://tierlore.com/",
     sous: [
       {
