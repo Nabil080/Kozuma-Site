@@ -11,11 +11,13 @@
 //   en   : le texte en anglais. Si tu l'enlèves, le français s'affiche à la place.
 //   lien : facultatif, l'adresse du site ou du dépôt public.
 //   sous : facultatif, la liste des étapes détaillées, avec les mêmes champs.
+//   replie : facultatif, mets true pour cacher ce bloc derrière le bouton « Voir plus ».
 //
 // Seulement des choses qui existent vraiment.
 
 const CARNET = [
   {
+    replie: true,
     date: "2023-01-30",
     fr: "Début de ma formation de développeur web à Simplon.",
     en: "Start of my web developer course at Simplon.",
@@ -88,6 +90,7 @@ const CARNET = [
     ],
   },
   {
+    replie: true,
     date: "2024-03-11",
     fin: "2024-04-07",
     fr: "La piscine de l'école 42.",
