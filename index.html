@@ -134,13 +134,31 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rules h3 { color: #7d95ff; } }
   .rules p { font-size: 17px; line-height: 1.45; }
 
-  /* The written log, in its own column of dates. Only the latest entries show until asked. */
-  .dated { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-width: 60em; }
-  .dated li { display: grid; grid-template-columns: 8.2em 1fr; gap: 20px; padding: 13px 0; font-size: clamp(18px, 1.5vw, 21px); line-height: 1.32; }
-  .dated li[hidden], .more[hidden] { display: none; }
-  .dated time { color: var(--soft); font-variant-numeric: tabular-nums; }
-  .more { min-height: 44px; margin-top: 14px; padding: 0 18px; border: 0; border-radius: 99px; background: var(--chip); color: var(--on); font: 600 15px var(--body); cursor: pointer; transition: transform 160ms var(--ease-out); }
-  .more:active { transform: scale(.97); }
+  /* The written log: big steps always show, their details unfold under them. */
+  .dated, .subs { list-style: none; margin: 0; padding: 0; }
+  .dated { display: grid; max-width: 64em; }
+  .dated > li { display: grid; grid-template-columns: 11.5em minmax(0, 1fr); gap: 20px; padding: clamp(18px, 2.2vw, 30px) 0; align-items: baseline; font-size: clamp(17px, 1.35vw, 19px); line-height: 1.32; }
+  .dated > li[hidden] { display: none; }
+  .log-more { margin-top: 8px; }
+  .dated time { font-variant-numeric: tabular-nums; }
+  .dated > li > time, .log-status { font-weight: 600; }
+  .log-title { display: block; font: 600 clamp(25px, 3vw, 44px)/1.1 var(--display); letter-spacing: -.04em; text-wrap: balance; }
+  .log-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; margin-top: 8px; }
+  .log-link, .log-open { min-height: 44px; display: inline-flex; align-items: center; font: 600 16px var(--body); color: var(--on); }
+  .log-link { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .log-open { gap: 6px; padding: 0 14px 0 16px; border: 0; border-radius: 99px; background: var(--chip); cursor: pointer; transition: transform 160ms var(--ease-out); }
+  .log-open:active { transform: scale(.97); }
+  .log-open svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform 220ms var(--ease-out); }
+  .log-open[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 260ms var(--ease-out); }
+  .fold.on { grid-template-rows: 1fr; }
+  .subs { min-height: 0; overflow: hidden; visibility: hidden; transition: visibility 260ms; }
+  .fold.on .subs { visibility: visible; }
+  .subs li { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 16px; padding: 7px 0; font-size: 17px; line-height: 1.38; }
+  .subs li:first-child { margin-top: 14px; }
+  .subs time { color: var(--soft); }
+  .sub-link { font-weight: 600; white-space: nowrap; text-underline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .fold, .subs { transition: none; } }
   .note { margin-top: 22px; color: var(--soft); font-size: 15px; max-width: 44em; }
 
   .close { background: var(--close); color: var(--on-close); padding: clamp(56px, 11vh, 128px) var(--edge) 30px var(--spine); position: relative; transition: background 320ms var(--ease-out); }
@@ -180,7 +198,7 @@
     .tl { grid-template-columns: 1fr; margin-right: 0; border-radius: 14px; align-items: start; }
     .sheet { border-radius: 16px; padding-left: 20px; padding-right: 20px; }
     .rules { grid-template-columns: 1fr; gap: 28px; }
-    .dated li { grid-template-columns: 1fr; gap: 2px; padding: 11px 0; }
+    .dated > li, .subs li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
     .mail { font-size: 7.6vw; }
   }
 
@@ -293,15 +311,9 @@
       </div>
     </section>
 
-    <section class="entry" data-stop id="carnet">
+    <section class="entry" data-stop id="carnet" hidden>
       <h2 class="display part say-in"><span lang="fr">Le carnet</span><span lang="en">The log</span></h2>
-      <ol class="dated">
-        <li class="say-in"><time datetime="2026-10-15"><span lang="fr">15 octobre 2026</span><span lang="en">15 October 2026</span></time><span><span lang="fr">Premier jour de TierLore. Les prototypes de jeux arrivent sur le site.</span><span lang="en">First day of TierLore. The game prototypes join the site.</span></span></li>
-        <li class="say-in"><time datetime="2026-10-14"><span lang="fr">14 octobre 2026</span><span lang="en">14 October 2026</span></time><span><span lang="fr">Le logo |&lt; prend sa place, avec le thème clair et sombre.</span><span lang="en">The |&lt; logo takes its place, along with the light and dark themes.</span></span></li>
-        <li class="say-in"><time datetime="2026-10-13"><span lang="fr">13 octobre 2026</span><span lang="en">13 October 2026</span></time><span><span lang="fr">Première page de kozuma.studio.</span><span lang="en">First page of kozuma.studio.</span></span></li>
-        <li class="say-in"><time datetime="2026-10-10"><span lang="fr">10 octobre 2026</span><span lang="en">10 October 2026</span></time><span><span lang="fr">Rewind a son site, et sa politique de confidentialité.</span><span lang="en">Rewind gets its site and its privacy policy.</span></span></li>
-      </ol>
-      <button type="button" class="more" id="more" hidden><span lang="fr">Voir tout le carnet</span><span lang="en">See the whole log</span></button>
+      <ol class="dated"></ol>
     </section>
   </div>
 
@@ -319,7 +331,109 @@
   </section>
 </main>
 
+<script src="carnet.js"></script>
 <script>
+  // The log's entries live in carnet.js. A mistake there only hides this section.
+  (function () {
+    if (typeof CARNET === 'undefined') return;
+    var list = document.querySelector('.dated');
+    function el(tag, cls) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      return n;
+    }
+    function span(lang, text) {
+      var s = el('span');
+      s.lang = lang;
+      s.textContent = text;
+      return s;
+    }
+    function valid(e) { return e && e.fr && (e.enCours || !isNaN(new Date(e.date + 'T12:00:00'))); }
+    function rank(e) { return e.enCours ? '9999' : e.date; }
+    function newestFirst(list) { return list.sort(function (a, b) { return rank(a) < rank(b) ? -1 : rank(a) > rank(b) ? 1 : 0; }).reverse(); }
+    function when(e) {
+      if (e.enCours) {
+        var now = el('span', 'log-status');
+        now.append(span('fr', 'En cours'), span('en', 'In progress'));
+        return now;
+      }
+      var time = el('time');
+      time.dateTime = e.date;
+      time.append(span('fr', day(e, 'fr-FR')), span('en', day(e, 'en-GB')));
+      return time;
+    }
+    function words(e, cls) {
+      var text = el('span', cls);
+      text.append(span('fr', e.fr), span('en', e.en || e.fr));
+      return text;
+    }
+    function link(e, cls) {
+      var host = new URL(e.lien).hostname, a = el('a', cls);
+      var fr = host.endsWith('github.com') ? 'Voir sur GitHub' : host.endsWith('itch.io') ? 'Jouer sur itch.io' : 'Voir le site';
+      var en = host.endsWith('github.com') ? 'See on GitHub' : host.endsWith('itch.io') ? 'Play on itch.io' : 'See the site';
+      a.href = e.lien;
+      a.rel = 'noopener';
+      a.append(span('fr', fr), span('en', en));
+      return a;
+    }
+    function day(e, locale) {
+      var format = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+      var from = new Date(e.date + 'T12:00:00'), to = new Date(e.fin + 'T12:00:00');
+      var text = isNaN(to) ? format.format(from) : format.formatRange(from, to);
+      return locale === 'fr-FR' ? text.replace(/^1 /, '1er ') : text;
+    }
+    newestFirst(CARNET.filter(valid)).forEach(function (e, i) {
+      var li = el('li', 'say-in'), body = el('div'), actions = el('div', 'log-actions');
+      var subs = newestFirst((e.sous || []).filter(valid));
+      body.append(words(e, 'log-title'));
+      if (e.lien) actions.append(link(e, 'log-link'));
+      if (subs.length) {
+        var fold = el('div', 'fold'), inner = el('ol', 'subs'), open = el('button', 'log-open');
+        inner.id = 'carnet-sous-' + i;
+        subs.forEach(function (s) {
+          var row = el('li');
+          row.append(when(s), words(s));
+          if (s.lien) row.lastChild.append(' ', link(s, 'sub-link'));
+          inner.append(row);
+        });
+        open.type = 'button';
+        open.setAttribute('aria-expanded', 'false');
+        open.setAttribute('aria-controls', inner.id);
+        open.append(span('fr', 'Voir le détail (' + subs.length + ')'), span('en', 'Show details (' + subs.length + ')'));
+        open.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+        open.addEventListener('click', function () {
+          var on = open.getAttribute('aria-expanded') !== 'true';
+          open.setAttribute('aria-expanded', String(on));
+          fold.classList.toggle('on', on);
+          if (typeof readTarget === 'function') setTimeout(readTarget, 260);
+        });
+        actions.append(open);
+        fold.append(inner);
+        body.append(actions, fold);
+      } else if (e.lien) body.append(actions);
+      li.append(when(e), body);
+      list.append(li);
+    });
+    document.getElementById('carnet').hidden = !list.children.length;
+
+    // Only the latest big steps show; the rest waits behind a button.
+    var folded = Array.from(list.children).slice(4);
+    if (folded.length) {
+      var more = el('button', 'log-open log-more');
+      more.type = 'button';
+      more.append(span('fr', 'Voir plus (' + folded.length + ')'), span('en', 'Show more (' + folded.length + ')'));
+      folded.forEach(function (li) { li.hidden = true; });
+      more.addEventListener('click', function () {
+        folded.forEach(function (li) { li.hidden = false; });
+        more.remove();
+        var first = folded[0].querySelector('.log-open, a');
+        if (first) first.focus({ preventScroll: true });
+        if (typeof readTarget === 'function') readTarget();
+      });
+      list.after(more);
+    }
+  })();
+
   function paintCards(lang) {
     document.querySelectorAll('img[data-card]').forEach(function (img) {
       img.src = 'img/rewind/' + (lang === 'fr' ? 'fr/' : '') + img.dataset.card + '.webp';
@@ -380,19 +494,6 @@
   }
   row.addEventListener('pointerup', release);
   row.addEventListener('pointercancel', release);
-
-  // The log keeps growing in the page; only the five latest show until asked.
-  var entries = document.querySelectorAll('.dated li'), more = document.getElementById('more');
-  if (entries.length > 5) {
-    entries.forEach(function (li, i) { li.hidden = i >= 5; });
-    more.hidden = false;
-    more.addEventListener('click', function () {
-      entries.forEach(function (li) { li.hidden = false; });
-      more.hidden = true;
-      entries[5].setAttribute('tabindex', '-1');
-      entries[5].focus({ preventScroll: true });
-    });
-  }
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
