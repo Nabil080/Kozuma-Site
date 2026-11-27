@@ -237,18 +237,12 @@ const CARNET = [
     ],
   },
   {
-    enCours: true,
+    date: "2026-11-27",
     titre: "Rewind",
-    fr: "Ton année en photos, en stories. Rien ne quitte ton téléphone.",
-    en: "Your year in photos, as story cards. Nothing leaves your phone.",
+    fr: "Sortie sur Google Play. Ton année en photos, en stories, sans que rien ne quitte ton téléphone.",
+    en: "Out on Google Play. Your year in photos, as story cards, with nothing leaving your phone.",
     lien: "https://rewind.kozuma.studio/",
     sous: [
-      {
-        date: "2026-11-27",
-        fr: "Sortie sur Google Play.",
-        en: "Out on Google Play.",
-        lien: "https://play.google.com/store/apps/details?id=studio.kozuma.rewind",
-      },
       {
         date: "2026-10-13",
         fr: "Passage en test.",
@@ -325,5 +319,11 @@ const CARNET = [
         en: "A survey to choose the design, between three directions.",
       },
     ],
+  },
+  {
+    enCours: true,
+    titre: "Wheatfall",
+    fr: "Un jeu vidéo, à venir sur Steam.",
+    en: "A video game, coming to Steam.",
   },
 ];
