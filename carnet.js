@@ -1,20 +1,13 @@
-// LE CARNET
+// Entries of the "Journey" section on the homepage, sorted newest first by the page.
 //
-// Chaque bloc de la liste est une grande étape, toujours visible.
-// Ses étapes détaillées vont dans "sous", et se déroulent au clic.
-//
-// Pour ajouter une entrée : copie un bloc { ... }, colle-le où tu veux, change les valeurs.
-//   date : année-mois-jour. La date affichée et l'ordre se font tout seuls.
-//   fin  : facultatif, la date de fin quand ça a duré plusieurs jours.
-//   enCours : mets true à la place de la date pour un projet en cours. Il s'affiche tout en haut.
-//   titre : un nom court, écrit en grand. "title" pour sa version anglaise, si elle change.
-//   fr   : le texte en français.
-//   en   : le texte en anglais. Si tu l'enlèves, le français s'affiche à la place.
-//   lien : facultatif, l'adresse du site ou du dépôt public.
-//   sous : facultatif, la liste des étapes détaillées, avec les mêmes champs.
-//   replie : facultatif, mets true pour cacher ce bloc derrière le bouton « Voir plus ».
-//
-// Seulement des choses qui existent vraiment.
+//   date     YYYY-MM-DD
+//   fin      optional end date, for things that lasted several days
+//   enCours  true instead of a date for a project still in progress (shown first)
+//   titre    short title ("title" for the English one, if different)
+//   fr, en   description (falls back to fr when en is missing)
+//   lien     optional link to the site or the repo
+//   sous     optional list of smaller steps, same fields, folded under the entry
+//   replie   true to hide the entry behind the "Show more" button
 
 const CARNET = [
   {
