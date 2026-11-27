@@ -244,6 +244,12 @@ const CARNET = [
     lien: "https://rewind.kozuma.studio/",
     sous: [
       {
+        date: "2026-11-27",
+        fr: "Sortie sur Google Play.",
+        en: "Out on Google Play.",
+        lien: "https://play.google.com/store/apps/details?id=studio.kozuma.rewind",
+      },
+      {
         date: "2026-10-13",
         fr: "Passage en test.",
         en: "Testing begins.",
