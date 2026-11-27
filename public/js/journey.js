@@ -1,25 +1,25 @@
-// Entries of the "Journey" section on the homepage, sorted newest first by the page.
+// Entries of the journey section on the homepage, sorted newest first by home.js.
 //
-//   date     YYYY-MM-DD
-//   fin      optional end date, for things that lasted several days
-//   enCours  true instead of a date for a project still in progress (shown first)
-//   titre    short title ("title" for the English one, if different)
-//   fr, en   description (falls back to fr when en is missing)
-//   lien     optional link to the site or the repo
-//   sous     optional list of smaller steps, same fields, folded under the entry
-//   replie   true to hide the entry behind the "Show more" button
+//   date        YYYY-MM-DD
+//   end         optional end date, for things that lasted several days
+//   inProgress  true instead of a date for a project still in progress (shown first)
+//   title       short title, titleEn for the English one if it differs
+//   fr, en      description (falls back to fr when en is missing)
+//   link        optional link to the site or the repo
+//   steps       optional list of smaller steps, same fields, folded under the entry
+//   collapsed   true to hide the entry behind the "Show more" button
 
-const CARNET = [
+const JOURNEY = [
   {
-    replie: true,
+    collapsed: true,
     date: "2023-01-30",
-    titre: "Simplon",
+    title: "Simplon",
     fr: "Début de ma formation de développeur web.",
     en: "Start of my web developer course.",
-    sous: [
+    steps: [
       {
         date: "2022-12-05",
-        fin: "2022-12-09",
+        end: "2022-12-09",
         fr: "Une semaine de présélection, et la découverte du code.",
         en: "A week of pre-selection, and discovering code.",
       },
@@ -27,40 +27,40 @@ const CARNET = [
   },
   {
     date: "2023-09-22",
-    titre: "Diplôme RNCP 5",
-    title: "RNCP 5 diploma",
+    title: "Diplôme RNCP 5",
+    titleEn: "RNCP 5 diploma",
     fr: "Développeur web et web mobile.",
     en: "Web and mobile web developer.",
-    sous: [
+    steps: [
       {
         date: "2023-03-16",
         fr: "AlloSimplon : un catalogue de films avec comptes, notes, commentaires et administration.",
         en: "AlloSimplon: a film catalogue with accounts, ratings, comments and an admin area.",
-        lien: "https://github.com/Nabil080/allosimplon",
+        link: "https://github.com/Nabil080/allosimplon",
       },
       {
         date: "2023-04-07",
         fr: "OOP Fight : des combats de personnages, pour apprendre la programmation objet en PHP.",
         en: "OOP Fight: character battles, to learn object-oriented programming in PHP.",
-        lien: "https://github.com/Nabil080/OOP-Fight",
+        link: "https://github.com/Nabil080/OOP-Fight",
       },
       {
         date: "2023-04-18",
         fr: "Un suivi du Covid avec les données mondiales du jour et des graphiques.",
         en: "A Covid tracker with daily global data and charts.",
-        lien: "https://github.com/Nabil080/covid-tracker",
+        link: "https://github.com/Nabil080/covid-tracker",
       },
       {
         date: "2023-04-21",
         fr: "Le moteur d'un blog, à partir d'un simple gabarit statique.",
         en: "The engine of a blog, built from a plain static template.",
-        lien: "https://github.com/Nabil080/Blog-backend",
+        link: "https://github.com/Nabil080/Blog-backend",
       },
       {
         date: "2023-04-28",
         fr: "En groupe : un site pour l'école, resté inachevé faute de temps.",
         en: "As a group: a website for the school, left unfinished for lack of time.",
-        lien: "https://github.com/Nabil080/simplon-charleville",
+        link: "https://github.com/Nabil080/simplon-charleville",
       },
       {
         date: "2023-06-13",
@@ -71,7 +71,7 @@ const CARNET = [
         date: "2023-06-14",
         fr: "Un prototype qui affiche les publications d'une page Facebook sur un site.",
         en: "A prototype that shows a Facebook page's posts on a website.",
-        lien: "https://github.com/Nabil080/FbPageViewer",
+        link: "https://github.com/Nabil080/FbPageViewer",
       },
       {
         date: "2023-07-18",
@@ -82,19 +82,19 @@ const CARNET = [
         date: "2023-11-21",
         fr: "En stage : une application de gestion de camping, personnalisable.",
         en: "On an internship: a customizable campsite management app.",
-        lien: "https://github.com/Nabil080/applicamping",
+        link: "https://github.com/Nabil080/applicamping",
       },
     ],
   },
   {
-    replie: true,
+    collapsed: true,
     date: "2024-03-11",
-    fin: "2024-04-07",
-    titre: "Piscine de l'école 42",
-    title: "42 school piscine",
+    end: "2024-04-07",
+    title: "Piscine de l'école 42",
+    titleEn: "42 school piscine",
     fr: "Quatre semaines de sélection.",
     en: "Four weeks of selection.",
-    sous: [
+    steps: [
       {
         date: "2024-05-13",
         fr: "Accepté à 42, et rentrée.",
@@ -104,75 +104,75 @@ const CARNET = [
   },
   {
     date: "2025-05-25",
-    titre: "École 42",
-    title: "42 school",
+    title: "École 42",
+    titleEn: "42 school",
     fr: "Tronc commun terminé, jusqu'à Transcendance.",
     en: "Common core completed, all the way to Transcendence.",
-    sous: [
+    steps: [
       {
         date: "2024-05-15",
         fr: "libft : refaire une partie de la bibliothèque standard du C.",
         en: "libft: rebuilding part of the C standard library.",
-        lien: "https://github.com/Nabil080/libft",
+        link: "https://github.com/Nabil080/libft",
       },
       {
         date: "2024-06-13",
         fr: "push_swap : un algorithme de tri avec un jeu d'opérations imposé.",
         en: "push_swap: a sorting algorithm with a fixed set of operations.",
-        lien: "https://github.com/Nabil080/push_swap",
+        link: "https://github.com/Nabil080/push_swap",
       },
       {
         date: "2024-06-23",
         fr: "FdF : un rendu 3D en fil de fer.",
         en: "FdF: a 3D wireframe renderer.",
-        lien: "https://github.com/Nabil080/FdF",
+        link: "https://github.com/Nabil080/FdF",
       },
       {
         date: "2024-09-03",
         fr: "philosophers : une simulation pour apprendre le multithreading.",
         en: "philosophers: a simulation to learn multithreading.",
-        lien: "https://github.com/Nabil080/philosophers",
+        link: "https://github.com/Nabil080/philosophers",
       },
       {
         date: "2024-09-27",
         fr: "minishell : un petit shell Unix.",
         en: "minishell: a small Unix shell.",
-        lien: "https://github.com/Nabil080/minishell",
+        link: "https://github.com/Nabil080/minishell",
       },
       {
         date: "2024-10-20",
         fr: "cub3D : un moteur de raycasting.",
         en: "cub3D: a raycasting engine.",
-        lien: "https://github.com/Nabil080/cub3d",
+        link: "https://github.com/Nabil080/cub3d",
       },
       {
         date: "2025-01-13",
         fr: "ircServ : un serveur IRC en C++.",
         en: "ircServ: an IRC server in C++.",
-        lien: "https://github.com/Nabil080/ircServ",
+        link: "https://github.com/Nabil080/ircServ",
       },
       {
         date: "2025-05-06",
         fr: "KingPong : Pong dans le navigateur, avec le jeu en ligne et des fonctions sociales.",
         en: "KingPong: Pong in the browser, with online play and social features.",
-        lien: "https://github.com/Nabil080/KingPong",
+        link: "https://github.com/Nabil080/KingPong",
       },
       {
         date: "2025-06-22",
         fr: "À côté : autobear.nvim, une petite extension pour Neovim.",
         en: "On the side: autobear.nvim, a small Neovim extension.",
-        lien: "https://github.com/Nabil080/autobear.nvim",
+        link: "https://github.com/Nabil080/autobear.nvim",
       },
     ],
   },
   {
     date: "2025-10-28",
-    titre: "Le jeu vidéo",
-    title: "Video games",
+    title: "Le jeu vidéo",
+    titleEn: "Video games",
     fr: "Une passion naissante, qui a mené à plusieurs projets.",
     en: "A growing passion, which led to several projects.",
-    lien: "https://kozumagames.itch.io",
-    sous: [
+    link: "https://kozumagames.itch.io",
+    steps: [
       {
         date: "2025-10-28",
         fr: "Premiers pas sur Godot : Pong lance mon 20 Games Challenge.",
@@ -207,10 +207,10 @@ const CARNET = [
   },
   {
     date: "2026-10-13",
-    titre: "Kozuma",
+    title: "Kozuma",
     fr: "Création de ma micro-entreprise, et début des projets pro.",
     en: "Founding my own business, and the start of professional projects.",
-    sous: [
+    steps: [
       {
         date: "2026-10-13",
         fr: "Première page de kozuma.studio.",
@@ -225,17 +225,17 @@ const CARNET = [
         date: "2026-10-15",
         fr: "Les prototypes de jeux rejoignent le site.",
         en: "The game prototypes join the site.",
-        lien: "https://kozumagames.itch.io",
+        link: "https://kozumagames.itch.io",
       },
     ],
   },
   {
     date: "2026-11-27",
-    titre: "Rewind",
+    title: "Rewind",
     fr: "Sortie sur Google Play. Ton année en photos, en stories, sans que rien ne quitte ton téléphone.",
     en: "Out on Google Play. Your year in photos, as story cards, with nothing leaving your phone.",
-    lien: "https://rewind.kozuma.studio/",
-    sous: [
+    link: "https://rewind.kozuma.studio/",
+    steps: [
       {
         date: "2026-10-13",
         fr: "Passage en test.",
@@ -260,7 +260,7 @@ const CARNET = [
         date: "2026-10-10",
         fr: "Rewind a son site, et sa politique de confidentialité.",
         en: "Rewind gets its site and its privacy policy.",
-        lien: "https://rewind.kozuma.studio/",
+        link: "https://rewind.kozuma.studio/",
       },
       {
         date: "2026-10-11",
@@ -275,12 +275,12 @@ const CARNET = [
     ],
   },
   {
-    enCours: true,
-    titre: "TierLore",
+    inProgress: true,
+    title: "TierLore",
     fr: "Des tier lists d'anime qui ne spoilent rien.",
     en: "Anime tier lists that spoil nothing.",
-    lien: "https://tierlore.com/",
-    sous: [
+    link: "https://tierlore.com/",
+    steps: [
       {
         date: "2026-10-15",
         fr: "Première mise en ligne.",
@@ -314,8 +314,8 @@ const CARNET = [
     ],
   },
   {
-    enCours: true,
-    titre: "Wheatfall",
+    inProgress: true,
+    title: "Wheatfall",
     fr: "Un jeu vidéo, à venir sur Steam.",
     en: "A video game, coming to Steam.",
   },
