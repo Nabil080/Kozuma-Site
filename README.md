@@ -19,8 +19,9 @@ the site itself so nothing goes to Google Fonts, and the only outside script is 
 
 ## Hosting
 
-The site runs on Cloudflare Workers as static assets. `wrangler.jsonc` serves the repo root and
-Cloudflare deploys it on every push to `main`.
+The site runs on Cloudflare Workers as static assets. `wrangler.jsonc` serves the repo root, and a
+GitHub Action (`.github/workflows/deploy.yml`) deploys it with Wrangler on every push to `main`.
+Pull requests get their own preview URL.
 
 - `_headers`: security headers, including the Content Security Policy
 - `_redirects`: `kozuma.studio/rewind` (the short link printed on Rewind's cards) forwards to
